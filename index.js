@@ -1,7 +1,7 @@
 // Window prompt
 let flavor = prompt(
   "Please enter your flavor choices separated by commas.",
-  "vanilla,vanilla,vanilla,strawberry,coffee,coffee"
+  "vanilla, vanilla, vanilla, strawberry, coffee, coffee"
 );
 /* if (flavor != null) {
   console.table(flavor);
@@ -35,5 +35,4 @@ function countFlavors(options, array) {
 
 let flavorArray = makeArray(flavor);
 console.table(countFlavors(orders, flavorArray));
-console.log(flavorArray);
 // Console table
