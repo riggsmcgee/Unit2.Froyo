@@ -1,38 +1,38 @@
 // Window prompt
-let flavor = prompt(
-  "Please enter your flavor choices separated by commas.",
-  "vanilla, vanilla, vanilla, strawberry, coffee, coffee"
-);
-/* if (flavor != null) {
-  console.table(flavor);
-} */
+let order = prompt(`What would you like to order?
+Please separate orders with a comma ' , '`);
 
-// For loops: vanilla,vanilla,vanilla,strawberry,coffee,coffee
-// const flavor = "vanilla, vanilla, vanilla, strawberry, coffee, coffee";
-const orders = [
-  { name: "vanilla", value: 0 },
-  { name: "strawberry", value: 0 },
-  { name: "coffee", value: 0 },
-];
+/* let order =
+  'VaNiLla,  StrawBerry, coffEe,vanilla,coffee, strawberry,   vanilla'; */
 
-function makeArray(string) {
-  return string.split(", ");
+let orderString = formatOrder(order);
+let orderArray = orderToArray(orderString);
+let finalOrder = processOrder(orderArray);
+
+// Converts the order to a universal format
+function formatOrder(str) {
+  let correctedString = str.replace(/, +/g, ', ');
+  correctedString = correctedString.replace(/,(?! )/g, ', ');
+  correctedString = correctedString.toLowerCase();
+  return correctedString;
 }
 
-function countFlavors(options, array) {
-  // for (key of options) {
-  for (element of array) {
-    orders.map((ele) => {
-      if (ele.name === element) {
-        ele.value++;
-      }
-      return ele;
-    });
-  }
-  // }
-  return options;
+// Converts strings into objects
+function orderToArray(order) {
+  return order.split(', ');
 }
 
-let flavorArray = makeArray(flavor);
-console.table(countFlavors(orders, flavorArray));
-// Console table
+// Counts the occurences of list item and organizes it into objects.
+function processOrder(order) {
+  let countOccurrences = order.reduce((acc, item) => {
+    acc[item] = (acc[item] || 0) + 1;
+    return acc;
+  }, {});
+
+  let tableData = Object.keys(countOccurrences).map((key) => {
+    return { Name: key, Count: countOccurrences[key] };
+  });
+  return tableData;
+}
+
+console.table(finalOrder);
